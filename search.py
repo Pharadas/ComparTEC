@@ -21,7 +21,7 @@ def changeScreen(instance):
 			break
 
 	# print(pyrebaseSetup.currentUser)
-	print(pyrebaseSetup.currentUser['subject'])
+	print(pyrebaseSetup.currentUser)
 	path = pyrebaseSetup.currentUser['pdf_name']
 	os.system('"C:/Users/david/Documents/repos/testthings/ComparTEC/testpdfs/' + path + '"')
 
@@ -50,7 +50,7 @@ class Search(BoxLayout):
 		layout.bind(minimum_height=layout.setter('height'))
 		items = pyrebaseSetup.db.get()
 		for person in items.each():
-			if currentFilterString in person.val()['subject']:
+			if currentFilterString.lower() in person.val()['subject'].lower() and person.val()['type'] == "student":
 				btn = Button(text = person.val()['user_name'], size_hint_y=None, height=40)
 				btn.bind(on_press=changeScreen)
 				layout.add_widget(btn)

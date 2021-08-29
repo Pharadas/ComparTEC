@@ -237,13 +237,14 @@ if __name__ == '__main__':
 			db.child(person.key()).remove()
 			# print(person.val())
 
-	for i in range(50):
+	for i in range(100):
 		data = {
 			"user_id": str(uuid.uuid1()),
 			"user_name": random.choice(nombres),
 			"upload_date": str(random.randint(0, 1000)),
 			"subject": random.choice(materias),
-			"pdf_name": random.choice(os.listdir("C:/Users/david/Documents/repos/testthings/ComparTEC/testpdfs"))
+			"pdf_name": random.choice(os.listdir("C:/Users/david/Documents/repos/testthings/ComparTEC/testpdfs")),
+			"type": random.choice(["mae", "student"])
 		}
 
 		print(data)
