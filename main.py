@@ -6,6 +6,7 @@ from kivy.core.window import Window
 from kivy.uix.widget import Widget
 from horarios import Horarios
 from horarios import Asesoria
+from perfil import AddNotes
 
 # custom imports
 import pyrebaseSetup
@@ -26,14 +27,15 @@ Builder.load_string("""
         Button:
             text: 'Maes'
             on_press: root.manager.current = 'asesorias'
-
+        Button:
+            text: 'Perfil y carga de archivos'
+            on_press: root.manager.current = 'perfil'
 <SearchScreen>:
     Search:
 		size_hint: (1, None)
 		Button:
 			text: 'Back'
             on_press: root.manager.current = 'menu'
-
 <AsesoriasScreen>:
     BoxLayout:
         orientation: 'vertical'
@@ -47,20 +49,43 @@ Builder.load_string("""
         Button:
             text: 'Registra asesoria'
             on_press: root.manager.current= 'asesoria'
-
 <HorariosScreen>:
     Horarios:
         size_hint: (1, None)
         Button:
             text: 'Back'
             on_press: root.manager.current = 'asesorias'
-
 <AsesoriaScreen>:
     Asesoria:
         size_hint: (1, None)
         Button:
             text: 'Back'
             on_press: root.manager.current = 'asesorias'
+<PerfilScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Button:
+            text: 'Inicio'
+            size_hint: (1.0, 0.2)
+            on_press: root.manager.current = 'menu'
+        Button:
+            text: 'Carga notas'
+            on_press: root.manager.current = 'addnotes'
+        Button:
+            text: 'Informacion personal'
+            on_press: root.manager.current = 'info'
+<AddNotesScreen>:
+    AddNotes:
+        size_hint: (1, None)
+        Button:
+            text: 'Back'
+            on_press: root.manager.current = 'perfil'
+<InfoScreen>:
+    Info:
+        size_hint: (1, None)
+        Button:
+            text: 'Back'
+            on_press: root.manager.current = 'perfil'
 """)
 
 # Declare both screens
@@ -78,19 +103,30 @@ class HorariosScreen(Screen):
 
 class AsesoriaScreen(Screen):
     pass
+class PerfilScreen(Screen):
+    pass
+
+class AddNotesScreen(Screen):
+    pass
+
+class InfoScreen(Screen):
+    pass
 
 class TestApp(App):
 	def build(self):
-		sm = ScreenManager()
-		sm.add_widget(MenuScreen(name='menu'))
-		sm.add_widget(SearchScreen(name='search'))
-		sm.add_widget(AsesoriasScreen(name='asesorias'))
-		sm.add_widget(HorariosScreen(name='horarios'))
-		sm.add_widget(AsesoriaScreen(name='asesoria'))
+            sm = ScreenManager()
+            sm.add_widget(MenuScreen(name='menu'))
+            sm.add_widget(SearchScreen(name='search'))
+            sm.add_widget(AsesoriasScreen(name='asesorias'))
+            sm.add_widget(HorariosScreen(name='horarios'))
+            sm.add_widget(AsesoriaScreen(name='asesoria'))
+            sm.add_widget(PerfilScreen(name='perfil'))
+            sm.add_widget(AddNotesScreen(name='addnotes'))
+            sm.add_widget(InfoScreen(name='info'))
 
-		return sm
+            return sm
 
 
 if __name__ == '__main__':
-	pyrebaseSetup.init()
-	TestApp().run()
+        pyrebaseSetup.init()
+        TestApp().run()
