@@ -9,12 +9,15 @@ from kivy.uix.scrollview import ScrollView
 from kivy.core.window import Window
 
 # screens imports
-from search import Scroll
+from search import Search
 
 Builder.load_string("""
 <MenuScreen>:
     BoxLayout:
 		orientation: 'vertical'
+		Button:
+			text: 'Inicio'
+			size_hint: (1.0, 0.2)
         Button:
             text: 'Notas'
             on_press: root.manager.current = 'search'
@@ -22,8 +25,11 @@ Builder.load_string("""
             text: 'Maes'
 
 <SearchScreen>:
-    Scroll:
+    Search:
 		size_hint: (1, None)
+		Button:
+			text: 'Back'
+            on_press: root.manager.current = 'menu'
 """)
 
 # Declare both screens
