@@ -23,69 +23,104 @@ Builder.load_string("""
 			size_hint: (1.0, 0.2)
         Button:
             text: 'Notas'
-            on_press: root.manager.current = 'search'
+            on_press: 
+				root.manager.transition.direction = 'left'
+				root.manager.current = 'wrapper'
         Button:
             text: 'Maes'
-            on_press: root.manager.current = 'asesorias'
+            on_press: 
+				root.manager.transition.direction = 'left'
+				root.manager.current = 'asesorias'
         Button:
             text: 'Perfil y carga de archivos'
-            on_press: root.manager.current = 'perfil'
-<SearchScreen>:
+            on_press: 
+				root.manager.transition.direction = 'left'
+				root.manager.current = 'perfil'
+
+<WrapperScreen>:
     Search:
 		size_hint: (1, None)
 		Button:
 			text: 'Back'
-            on_press: root.manager.current = 'menu'
+            on_press: 
+				root.manager.transition.direction = 'right'
+				root.manager.current = 'menu'
+
 <AsesoriasScreen>:
     BoxLayout:
         orientation: 'vertical'
         Button:
             text: 'Inicio'
             size_hint: (1.0, 0.2)
-            on_press: root.manager.current = 'menu'
+            on_press: 
+				root.manager.transition.direction = 'right'
+				root.manager.current = 'menu'
         Button:
             text: 'Consulta horarios'
-            on_press: root.manager.current = 'horarios'
+            on_press: 
+				root.manager.transition.direction = 'left'
+				root.manager.current = 'horarios'
         Button:
             text: 'Registra asesoria'
-            on_press: root.manager.current= 'asesoria'
+            on_press: 
+				root.manager.transition.direction = 'left'
+				root.manager.current= 'asesoria'
+
 <HorariosScreen>:
     Horarios:
         size_hint: (1, None)
         Button:
             text: 'Back'
-            on_press: root.manager.current = 'asesorias'
+            on_press: 
+				root.manager.transition.direction = 'right'
+				root.manager.current = 'asesorias'
+
 <AsesoriaScreen>:
     Asesoria:
         size_hint: (1, None)
         Button:
             text: 'Back'
-            on_press: root.manager.current = 'asesorias'
+            on_press: 
+				root.manager.transition.direction = 'right'
+				root.manager.current = 'asesorias'
+
 <PerfilScreen>:
     BoxLayout:
         orientation: 'vertical'
         Button:
             text: 'Inicio'
             size_hint: (1.0, 0.2)
-            on_press: root.manager.current = 'menu'
+            on_press: 
+				root.manager.transition.direction = 'right'
+				root.manager.current = 'menu'
         Button:
             text: 'Carga notas'
-            on_press: root.manager.current = 'addnotes'
+            on_press: 
+				root.manager.transition.direction = 'left'
+				root.manager.current = 'addnotes'
         Button:
             text: 'Informacion personal'
-            on_press: root.manager.current = 'info'
+            on_press: 
+				root.manager.transition.direction = 'left'
+				root.manager.current = 'info'
+
 <AddNotesScreen>:
     AddNotes:
         size_hint: (1, None)
         Button:
             text: 'Back'
-            on_press: root.manager.current = 'perfil'
+            on_press: 
+				root.manager.transition.direction = 'right'
+				root.manager.current = 'perfil'
+
 <InfoScreen>:
     Info:
         size_hint: (1, None)
         Button:
             text: 'Back'
-            on_press: root.manager.current = 'perfil'
+            on_press: 
+				root.manager.transition.direction = 'right'
+				root.manager.current = 'perfil'
 """)
 
 # Declare both screens
@@ -93,9 +128,16 @@ class MenuScreen(Screen):
     pass
 
 class SearchScreen(Screen):
-    pass
+	pass
+	# def __init__(self, **kwargs):
+	# 	self.name = 'search'
+	# 	super(Screen,self).__init__(**kwargs)
+	# 	# self.add_widget(Search)
 
 class AsesoriasScreen(Screen):
+    pass
+
+class WrapperScreen(Screen):
     pass
 
 class HorariosScreen(Screen):
@@ -116,7 +158,8 @@ class TestApp(App):
 	def build(self):
             sm = ScreenManager()
             sm.add_widget(MenuScreen(name='menu'))
-            sm.add_widget(SearchScreen(name='search'))
+            sm.add_widget(SearchScreen())
+            sm.add_widget(WrapperScreen(name='wrapper'))
             sm.add_widget(AsesoriasScreen(name='asesorias'))
             sm.add_widget(HorariosScreen(name='horarios'))
             sm.add_widget(AsesoriaScreen(name='asesoria'))
