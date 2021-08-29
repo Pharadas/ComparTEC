@@ -5,6 +5,8 @@ from kivy.uix.scrollview import ScrollView
 from kivy.core.window import Window
 from kivy.uix.textinput import TextInput
 from kivy.uix.image import Image
+from kivy.uix.anchorlayout import AnchorLayout
+import pyrebaseSetup
 
 class Search(BoxLayout):
 	def __init__(self, **kwargs):
@@ -15,14 +17,15 @@ class Search(BoxLayout):
 
 		self.orientation = 'vertical'
 		layout = GridLayout(cols=1, spacing=10, size_hint_y=None)
-		layout.bind(minimum_height=layout.setter('height'))
-		# for i in range(20):
-		# 	# buttonBox = BoxLayout(orientation='vertical', size=(Window.width, 500))
-		# 	# buttonBox.add_widget(Button(text=str(i), size_hint_y=None, height=40))
+		# layout.bind(minimum_height=layout.setter('height'))
+		items = pyrebaseSetup.db.get()
+		for person in items.each():
+			layout.add_widget(Button(text = person.val()['user_id'], size_hint_y=None, height=40))
+			# buttonBox = BoxLayout(orientation='vertical', size=(Window.width, 500))
+			# buttonBox.add_widget(Button(text=str(i), size_hint_y=None, height=40))
 		# 	# buttonBox.add_widget(Image(source='MayI.PNG'))
-		# 	# layout.add_widget(buttonBox)
-			# layout.add_widget(Button(text=str(i), size_hint_y=None, height=40))
-		layout.add_widget(Image(source='MayI.PNG'))
+			# layout.add_widget(buttonBox)
+		# layout.add_widget(Image(source='MayI.PNG'))
 			# root.add_widget(Image(source='MayI.PNG'))
 
 		root = ScrollView(size_hint=(1, None), size=(Window.width, Window.height - 115))

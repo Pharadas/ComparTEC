@@ -7,6 +7,9 @@ from kivy.uix.widget import Widget
 from horarios import Horarios
 from horarios import Asesoria
 
+# custom imports
+import pyrebaseSetup
+
 # screens imports
 from search import Search
 
@@ -87,10 +90,7 @@ class TestApp(App):
 
 		return sm
 
-def checkResize(width, height):
-	Window.size = (width, height)
-
-Window.bind(on_resize=checkResize)
 
 if __name__ == '__main__':
-    TestApp().run()
+	pyrebaseSetup.init()
+	TestApp().run()
